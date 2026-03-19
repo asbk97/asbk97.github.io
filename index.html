@@ -1,61 +1,238 @@
-<!DOCTYPE html>  
-<html lang="zh-CN">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>时光文化 - 个人主页</title>  
-<style>  
-        body {  
-            font-family: Arial, sans-serif;  
-            margin: 0;  
-            padding: 20px;  
-        }  
-        h1 {  
-            text-align: center;  
-        }  
-        .content {  
-            max-width: 800px;  
-            margin: 0 auto;  
-        }  
-        .links {  
-            margin-top: 20px;  
-        }  
-        .links a {  
-            display: block;  
-            margin-bottom: 10px;  
-            text-decoration: none;  
-            color: #0066cc;  
-        }  
-        .qrcode {  
-            margin-top: 20px;  
-            text-align: center;  
-        }  
-        .qrcode img {  
-            max-width: 200px;  
-        }  
-    </style>  
-</head>  
-<body>  
-    <div class="content">  
-        <h1>时光文化 - 个人主页</h1>  
-        <p>欢迎来到我的个人主页，这里主要分享数码相关内容。</p>  
-  
-        <h2>链接</h2>  
-        <div class="links">  
-            <a href="http://fnos.net/shiguangwenhua:5666">时光文化NAS</a>  
-            <a href="http://shiguangwenhua.online:20243">点播影视软件下载</a>  
-            <a href="http://shiguangwenhua.online:8088">腾飞云电脑</a> 
-            <a href="http://shiguangwenhua.online:3009">时光文化-轻聊</a>
-            <a href="https://github.com/asbk97/asbk97.github.io/blob/main/micoKMS.rar">微软激活计划</a>
-            
-            <!-- 在这里添加更多链接 -->  
-        </div>  
-  
-        <h2>二维码</h2>  
-        <div class="qrcode">  
-            <img src="shiguangwenhua.png" alt="二维码">  
-            <p>扫码下载群晖直播软件</p>  
-        </div>  
-    </div>  
-</body>  
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时光文化 - 个人主页</title>
+    <style>
+        /* 全局样式重置与基础设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* 容器样式 - 居中+阴影 */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            padding: 40px 30px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* 头部样式 */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e8f4f8;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 链接区域样式 */
+        .links-section {
+            margin-bottom: 40px;
+        }
+
+        .links-section h2 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .links-section h2::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 20px;
+            background: #667eea;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+
+        .links-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .link-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .link-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.15);
+            background: #f0f4ff;
+        }
+
+        .link-item a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .link-item a::before {
+            content: "🔗";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* 二维码区域样式 */
+        .qrcode-section {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 2px solid #e8f4f8;
+        }
+
+        .qrcode-section h2 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .qrcode-container {
+            display: inline-block;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .qrcode-container img {
+            max-width: 220px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .qrcode-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .qrcode-section p {
+            margin-top: 15px;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* 响应式适配 - 手机端优化 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .links-list {
+                grid-template-columns: 1fr;
+            }
+
+            .qrcode-container img {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <div class="header">
+            <h1>时光文化 - 个人主页</h1>
+            <p>欢迎来到我的个人主页，这里主要分享数码相关内容，包含NAS、影视、云电脑等实用资源</p>
+        </div>
+
+        <!-- 链接区域 -->
+        <div class="links-section">
+            <h2>常用资源链接</h2>
+            <div class="links-list">
+                <div class="link-item">
+                    <a href="http://fnos.net/shiguangwenhua:5666">时光文化NAS</a>
+                </div>
+                <div class="link-item">
+                    <a href="http://shiguangwenhua.online:20243">点播影视软件下载</a>
+                </div>
+                <div class="link-item">
+                    <a href="http://shiguangwenhua.online:8088">腾飞云电脑</a>
+                </div>
+                <div class="link-item">
+                    <a href="http://shiguangwenhua.online:3009">时光文化-轻聊</a>
+                </div>
+                <div class="link-item">
+                    <a href="https://github.com/asbk97/asbk97.github.io/blob/main/micoKMS.rar">微软激活计划</a>
+                </div>
+                <!-- 如需添加更多链接，复制上面的link-item块即可 -->
+            </div>
+        </div>
+
+        <!-- 二维码区域 -->
+        <div class="qrcode-section">
+            <h2>扫码获取资源</h2>
+            <div class="qrcode-container">
+                <img src="shiguangwenhua.png" alt="时光文化二维码 - 扫码下载群晖直播软件">
+            </div>
+            <p>扫码下载群晖直播软件</p>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>© 2026 时光文化 - 个人主页 | 托管于 GitHub Pages</p>
+        </div>
+    </div>
+</body>
 </html>

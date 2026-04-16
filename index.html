@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>时光文化 - 个人主页</title>
     <style>
-        /* 全局样式重置与基础设置 */
         * {
             margin: 0;
             padding: 0;
@@ -13,226 +12,323 @@
         }
 
         body {
-            font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #0a0b18;
+            background-attachment: fixed;
+            color: #e0e0e0;
             min-height: 100vh;
             padding: 20px;
-            color: #333;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* 容器样式 - 居中+阴影 */
+        /* 粒子画布 */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* 流动光线 */
+        .light-line {
+            position: fixed;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(92, 158, 255, 0.4), transparent);
+            top: 15%;
+            left: 0;
+            z-index: 0;
+            animation: lightFlow 12s linear infinite;
+        }
+        .light-line:nth-child(2) {
+            top: 35%;
+            animation-delay: 2s;
+        }
+        .light-line:nth-child(3) {
+            top: 60%;
+            animation-delay: 5s;
+        }
+        .light-line:nth-child(4) {
+            top: 85%;
+            animation-delay: 8s;
+        }
+
+        @keyframes lightFlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* 科技网格 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(to right, rgba(80,120,255,0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(80,120,255,0.07) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 加载动画 */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0b18;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(92, 158, 255, 0.2);
+            border-top: 3px solid #5c9eff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .container {
-            max-width: 850px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-            padding: 40px 30px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 880px;
+            margin: 40px auto;
+            background: rgba(20,25,45,0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(100,140,255,0.15);
+            box-shadow: 0 0 60px rgba(80,100,200,0.15);
+            padding: 50px 35px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
 
-        /* 头部样式 */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 3px;
+            background: linear-gradient(90deg, #4a8dff, #9d6fff, #4a8dff);
+            border-radius: 3px;
+        }
+
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e8f4f8;
+            margin-bottom: 45px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(100,140,255,0.2);
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
+            font-size: 2.4rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
 
-        .header h1::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 10%;
-            width: 80%;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border-radius: 3px;
+        .header h1 span {
+            background: linear-gradient(90deg, #5c9eff, #a77dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header p {
             font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
+            color: #b0c4de;
+            line-height: 1.7;
         }
 
-        /* 链接区域样式 */
         .links-section {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         .links-section h2 {
             font-size: 1.5rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
+            color: #ffffff;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
+            letter-spacing: 1px;
         }
 
         .links-section h2::before {
             content: "";
-            display: inline-block;
-            width: 6px;
-            height: 20px;
-            background: #667eea;
-            margin-right: 10px;
-            border-radius: 3px;
+            width: 8px; height: 22px;
+            background: linear-gradient(180deg, #5c9eff, #9d6fff);
+            margin-right: 12px;
+            border-radius: 4px;
         }
 
         .links-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
         }
 
         .link-item {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px 20px;
+            background: rgba(35,40,70,0.6);
+            border-radius: 12px;
+            padding: 18px 22px;
             transition: all 0.3s ease;
-            border-left: 4px solid #667eea;
+            border: 1px solid rgba(100,140,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #5c9eff, #9d6fff);
         }
 
         .link-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.15);
-            background: #f0f4ff;
+            transform: translateY(-4px);
+            background: rgba(50,60,110,0.6);
+            border-color: rgba(120,160,255,0.3);
+            box-shadow: 0 8px 20px rgba(80,100,200,0.15);
         }
 
         .link-item a {
             text-decoration: none;
-            color: #2c3e50;
-            font-size: 1rem;
+            color: #e0e6ff;
+            font-size: 1.05rem;
             display: flex;
             align-items: center;
         }
 
         .link-item a::before {
-            content: "🔗";
+            content: "➤";
+            color: #7ba6ff;
             margin-right: 10px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
-        /* 二维码区域样式 */
-        .qrcode-section {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 2px solid #e8f4f8;
-        }
-
-        .qrcode-section h2 {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .qrcode-container {
-            display: inline-block;
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        }
-
-        .qrcode-container img {
-            max-width: 220px;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .qrcode-container img:hover {
-            transform: scale(1.05);
-        }
-
-        .qrcode-section p {
-            margin-top: 15px;
-            color: #666;
-            font-size: 1rem;
-        }
-
-        /* 页脚样式 */
         .footer {
             text-align: center;
-            margin-top: 40px;
-            color: #888;
+            margin-top: 45px;
+            color: #7080a0;
             font-size: 0.9rem;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+            padding-top: 22px;
+            border-top: 1px solid rgba(80,100,160,0.15);
         }
 
-        /* 响应式适配 - 手机端优化 */
         @media (max-width: 768px) {
             .container {
-                padding: 25px 15px;
+                padding: 35px 20px;
+                margin: 20px auto;
             }
-
             .header h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
-
             .links-list {
                 grid-template-columns: 1fr;
-            }
-
-            .qrcode-container img {
-                max-width: 180px;
             }
         }
     </style>
 </head>
+
 <body>
+    <!-- 加载动画 -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- 粒子背景 -->
+    <div id="particles"></div>
+
+    <!-- 流动光线 -->
+    <div class="light-line"></div>
+    <div class="light-line"></div>
+    <div class="light-line"></div>
+    <div class="light-line"></div>
+
     <div class="container">
-        <!-- 头部区域 -->
         <div class="header">
-            <h1>时光文化 - 个人主页</h1>
+            <h1><span>时光文化</span> - 个人主页</h1>
             <p>欢迎来到我的个人主页，这里主要分享数码相关内容，包含NAS、影视、云电脑等实用资源</p>
         </div>
 
-        <!-- 链接区域 -->
         <div class="links-section">
             <h2>常用资源链接</h2>
             <div class="links-list">
-                <div class="link-item">
-                    <a href="https://fnos.net/shiguangwenhua">时光文化NAS</a>
-                </div>
-                <div class="link-item">
-                    <a href="http://shiguangwenhua.online:20243">点播影视软件下载</a>
-                </div>
-                <div class="link-item">
-                    <a href="http://shiguangwenhua.online:8088">腾飞云电脑</a>
-                </div>
-                <div class="link-item">
-                    <a href="http://shiguangwenhua.online:3009">时光文化-轻聊</a>
-                </div>
-                <div class="link-item">
-                    <a href="https://github.com/asbk97/asbk97.github.io/blob/main/micoKMS.rar">微软激活计划</a>
-                </div>
-                <!-- 如需添加更多链接，复制上面的link-item块即可 -->
+                <div class="link-item"><a href="https://fnos.net/shiguangwenhua">时光文化NAS</a></div>
+                <div class="link-item"><a href="http://shiguangwenhua.online:20243">点播影视软件下载</a></div>
+                <div class="link-item"><a href="http://shiguangwenhua.online:8088">腾飞云电脑</a></div>
+                <div class="link-item"><a href="http://shiguangwenhua.online:3009">时光文化-轻聊</a></div>
+                <div class="link-item"><a href="https://github.com/asbk97/asbk97.github.io/blob/main/micoKMS.rar">微软激活计划</a></div>
             </div>
         </div>
 
-        <!-- 二维码区域 -->
-        <div class="qrcode-section">
-            <h2>扫码获取资源</h2>
-            <div class="qrcode-container">
-                <img src="shiguangwenhua.png" alt="时光文化二维码 - 扫码下载群晖直播软件">
-            </div>
-            <p>扫码下载群晖直播软件</p>
-        </div>
-
-        <!-- 页脚 -->
         <div class="footer">
-            <p>© 2026 时光文化 - 个人主页 | 托管于 GitHub Pages</p>
+            <p>© 2026 时光文化 - 个人主页 | 科技与文化相融</p>
         </div>
     </div>
+
+    <!-- 粒子库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 加载动画
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // 粒子背景配置
+        particlesJS("particles", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#5c9eff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 120,
+                    "color": "#5c9eff",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
